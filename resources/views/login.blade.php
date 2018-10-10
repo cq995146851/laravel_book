@@ -99,7 +99,7 @@
                 }
                 layer.msg(data.message,{time:1000});
                 setTimeout(function(){
-                    location.href = "{{url('/category')}}";
+                    location.href = '{{$returnUrl}}';
                 },1000);
 
             },

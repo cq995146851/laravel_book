@@ -6,8 +6,9 @@
   <title>@yield('title')</title>
 
     <link rel="stylesheet" href="{{asset('/css/swipe.css')}}">
-    <link rel="stylesheet" href="{{asset('/css/weui.min.css')}}">
-    <link rel="stylesheet" href="{{asset('/css/weui.min2.css')}}">
+    <link href="https://cdn.bootcss.com/weui/0.2.2/style/weui.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('/css/weui-0.2.2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/css/weui-1.1.2.min.css')}}">
     <link rel="stylesheet" href="{{asset('/css/font-awesome-4.7.0/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('/css/book.css')}}">
 </head>

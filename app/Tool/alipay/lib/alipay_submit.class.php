@@ -176,7 +176,7 @@ class AlipaySubmit {
 			//放入数组中
 			$para_text[$key] = $value;
 		}
-		
+		dd($para_text);
 		if( ! empty ($para_text['res_data'])) {
 			//解析加密部分字符串
 			if($this->alipay_config['sign_type'] == '0001') {

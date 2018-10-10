@@ -11,6 +11,7 @@
 |
 */
 
+//前台
 //视图
 
 Route::group(['namespace' => 'View'], function () {
@@ -24,6 +25,8 @@ Route::group(['namespace' => 'View'], function () {
     Route::get('/product/category_id/{category_id}', 'BookController@toProduct');
     //商品详情
     Route::get('/product/{product_id}', 'BookController@pdt_content');
+    //购物车
+    Route::get('/cart', 'CartController@toCart');
 });
 
 
@@ -47,4 +50,46 @@ Route::group(['prefix' => 'service', 'namespace' => 'Service'], function () {
      */
     //根据分类id获取所有分类
     Route::get('getCategoryByParentId/parent_id/{parent_id}', 'BookController@getCategoryByParentId');
+    //添加购物车
+    Route::get('add_cart/product_id/{product_id}','CartController@addCart');
+    //删除购物车
+    Route::get('delete_cart','CartController@deleteCart');
+    //支付宝支付
+    Route::post('alipay', 'PayController@aliPay');
+    //文件上传
+    Route::post('upload', 'UploadController@uploadFile');
 });
+
+//判断是否登录
+Route::group(['middleware'=>'check.login'],function(){
+    Route::post('/order_commit', 'View\OrderController@toOrderCommit');
+    Route::get('/order_list', 'View\OrderController@toOrderList');
+});
+
+
+/*********************************后台相关*****************************************************/
+Route::get('admin/login','Admin\view\LoginController@toLogin');
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin\Service'], function () {
+    Route::post('login','LoginController@login');
+    Route::get('logout','LoginController@logout');
+});
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin\view', 'middleware'=>'check.admin.login'], function () {
+    Route::get('index','IndexController@toIndex');
+    Route::get('welcome','IndexController@toWelcome');
+    Route::get('category','CategoryController@toCategory');
+    Route::get('category_add','CategoryController@toCategoryAdd');
+    Route::get('category_edit','CategoryController@toCategoryEdit');
+    Route::get('product','ProductController@toProduct');
+});
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin\Service', 'middleware'=>'check.admin.login'], function () {
+    Route::post('category/add','CategoryController@add');
+    Route::post('category/delete','CategoryController@delete');
+    Route::post('category/edit','CategoryController@edit');
+});
+
+
+
+

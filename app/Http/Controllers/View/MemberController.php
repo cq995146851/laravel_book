@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\View;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
@@ -12,8 +13,9 @@ class MemberController extends Controller
         return view('register');
     }
     //登录
-    public function toLogin()
+    public function toLogin(Request $request)
     {
-        return view('login');
+        $returnUrl = $request->session()->get('returnUrl','/category');
+        return view('login',compact('returnUrl'));
     }
 }
